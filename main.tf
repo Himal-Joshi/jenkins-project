@@ -102,6 +102,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location            = azurerm_resource_group.rg.location
   size                = var.vm_size
   admin_username      = var.admin_username
+  zone                = "2"
 
   disable_password_authentication = false
   admin_password                  = "StudentPassword123!" # Change or override as needed

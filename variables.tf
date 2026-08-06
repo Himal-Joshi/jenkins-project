@@ -12,8 +12,8 @@ variable "location" {
 
 variable "vm_size" {
   type        = string
-  default     = "Standard_B1ls"
-  description = "Virtual Machine SKU size. Standard_B1ls costs ~$3.80/month (well under the $10/month limit)."
+  default     = "Standard_B2ats_v2"
+  description = "Virtual Machine SKU size. Standard_B2ats_v2 (2 vCPUs, 1 GiB RAM)."
 }
 
 variable "admin_username" {
