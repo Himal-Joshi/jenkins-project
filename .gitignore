@@ -1,9 +1,10 @@
+node_modules/
+app/node_modules/
+dist/
+app/dist/
 .terraform/
 *.tfstate
 *.tfstate.*
 crash.log
 *.tfvars
-!terraform.tfvars.example
 .terraform.lock.hcl
-./node_models/
-
