@@ -15,9 +15,15 @@ pipeline {
 
         stage('Environment Check') {
             steps {
-                echo 'Verifying Node.js and Terraform versions...'
-                sh 'node --version'
-                sh 'npm --version'
+                script {
+                    if (isUnix()) {
+                        sh 'node --version'
+                        sh 'npm --version'
+                    } else {
+                        bat 'node --version'
+                        bat 'npm --version'
+                    }
+                }
             }
         }
 
@@ -25,7 +31,13 @@ pipeline {
             steps {
                 dir('app') {
                     echo 'Installing React application dependencies...'
-                    sh 'npm install'
+                    script {
+                        if (isUnix()) {
+                            sh 'npm install'
+                        } else {
+                            bat 'npm install'
+                        }
+                    }
                 }
             }
         }
@@ -34,15 +46,14 @@ pipeline {
             steps {
                 dir('app') {
                     echo 'Building production bundle with Vite...'
-                    sh 'npm run build'
+                    script {
+                        if (isUnix()) {
+                            sh 'npm run build'
+                        } else {
+                            bat 'npm run build'
+                        }
+                    }
                 }
-            }
-        }
-
-        stage('Deploy / Restart Service') {
-            steps {
-                echo 'Deploying application to local systemd service...'
-                sh 'sudo systemctl restart reactapp || true'
             }
         }
     }
@@ -52,10 +63,10 @@ pipeline {
             echo 'Pipeline execution complete.'
         }
         success {
-            echo '✅ React App successfully built and deployed via Jenkins!'
+            echo '✅ React App successfully built via Jenkins!'
         }
         failure {
-            echo '❌ Jenkins pipeline failed. Check console output logs.'
+            echo '❌ Jenkins build failed. Check console output logs.'
         }
     }
 }
