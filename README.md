@@ -1,81 +1,74 @@
-# 🎓 Azure Student Pack - Terraform Practice Repository
+# 🚀 Jenkins CI/CD + React Web App on Azure via Terraform
 
-This repository contains **Terraform Infrastructure as Code (IaC)** files designed to provision and practice deploying a web server on Microsoft Azure using your **Azure Student Pack**.
-
----
-
-## 🛠️ Prerequisites
-
-1. **Terraform CLI**: Download and install Terraform from [terraform.io](https://www.terraform.io/downloads).
-2. **Azure CLI**: Install Azure CLI (`az`) to authenticate with your Azure account.
-   ```bash
-   az login
-   ```
-   *(Ensure your Azure Student subscription is set as active)*
-   ```bash
-   az account show
-   ```
+This repository provisions an **Azure Virtual Machine** pre-installed with **Jenkins CI/CD Automation Server** (Port 8080) and a **React + Express** application (Port 80) using **Terraform Infrastructure as Code**.
 
 ---
 
-## 🚀 Quickstart Steps
+## 🏗️ What gets provisioned?
 
-### 1. Initialize Terraform
-Run `init` to download the required AzureRM provider plugin:
-```bash
+- **Azure Resource Group**: `rg-jenkins-server-xxxx`
+- **Virtual Network & Subnet**: `10.0.0.0/16` & `10.0.1.0/24`
+- **Network Security Group**: Opens Port **8080** (Jenkins), Port **80** (React Web App), Port **22** (SSH).
+- **Virtual Machine**: `Standard_B2ats_v2` in **East Asia Zone 2** (Azure Student Pack compatible).
+- **Automated Cloud-Init Services**:
+  - Java 17 OpenJDK
+  - Jenkins Automation Server on `http://<PUBLIC_IP>:8080`
+  - Node.js 20.x & Git
+  - React + Express Web Application on `http://<PUBLIC_IP>`
+- **Jenkins Pipeline**: Includes a starter `Jenkinsfile` for building & deploying React apps.
+
+---
+
+## ⚡ Quickstart Guide
+
+### 1. Initialize & Deploy Infrastructure
+
+```powershell
+az login
 terraform init
-```
-
-### 2. Format & Validate Code
-Check your code syntax and formatting:
-```bash
-terraform fmt
-terraform validate
-```
-
-### 3. Preview Changes (Plan)
-See what Azure resources Terraform will create before applying:
-```bash
 terraform plan
-```
-
-### 4. Create Infrastructure (Apply)
-Deploy your Azure VM, Network, and Web Server:
-```bash
 terraform apply
 ```
-Type `yes` when prompted. 
-
-Once complete, Terraform will output your website URL:
-```text
-Outputs:
-
-public_ip_address = "20.xxx.xxx.xxx"
-website_url       = "http://20.xxx.xxx.xxx"
-ssh_command       = "ssh azureuser@20.xxx.xxx.xxx"
-```
-
-Open `website_url` in your browser to see your website live! 🎉
+Type **`yes`** when prompted.
 
 ---
 
-## 🧹 Clean Up (Save Student Credits)
+### 2. Retrieve Jenkins Initial Admin Password
 
-To prevent spending your Azure Student credits when you're done practicing, destroy all created resources with a single command:
+Once `terraform apply` finishes, fetch your Jenkins initial admin password via SSH:
 
 ```bash
-terraform destroy
+ssh azureuser@<YOUR_PUBLIC_IP> "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
 ```
-Type `yes` when prompted. Terraform will clean up all Azure resources cleanly!
+*(Default SSH password: `StudentPassword123!`)*
 
 ---
 
-## 📁 Resource Architecture
+### 3. Access Services
 
-- **Resource Group**: `rg-student-web-xxxx`
-- **Virtual Network**: `10.0.0.0/16`
-- **Subnet**: `10.0.1.0/24`
-- **Public IP**: Static Public IP (Standard SKU)
-- **Network Security Group**: Open Port 80 (HTTP) & Port 22 (SSH)
-- **VM Size**: `Standard_B1s` (Standard B1s burstable, eligible for Azure free tier / student credits)
-- **OS**: Ubuntu 22.04 LTS with automated Nginx web server setup
+- **Jenkins Automation Server**: `http://<YOUR_PUBLIC_IP>:8080`
+- **React Web Application**: `http://<YOUR_PUBLIC_IP>`
+
+---
+
+### 4. Push to a New Remote Repository
+
+To push this Jenkins setup to your new repository:
+
+```bash
+git remote set-url origin <YOUR_NEW_REPO_URL>
+git add .
+git commit -m "Configure Jenkins CI/CD server infrastructure with Terraform"
+git push -u origin main --force
+```
+
+---
+
+## 🧹 Teardown Infrastructure (Save Student Credits)
+
+When finished practicing, destroy all created Azure resources:
+
+```powershell
+terraform destroy
+```
+Type **`yes`** when prompted.

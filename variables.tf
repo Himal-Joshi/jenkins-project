@@ -1,6 +1,6 @@
 variable "prefix" {
   type        = string
-  default     = "student-web"
+  default     = "jenkins-server"
   description = "Prefix for all Azure resource names to keep them unique."
 }
 
