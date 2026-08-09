@@ -1,5 +1,0 @@
-# Example variable overrides
-prefix         = "student-web"
-location       = "East US"
-vm_size        = "Standard_B1s"
-admin_username = "azureuser"
