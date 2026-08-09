@@ -1,19 +1,733 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230078D4'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="React Web Application provisioned on Microsoft Azure using Terraform Infrastructure as Code." />
-    <title>Azure React Cloud Portal | Powered by Terraform</title>
+<html lang="en" data-theme="light">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced College of Engineering and Management (ACEM) | Balkhu, Kathmandu</title>
+  <meta name="description"
+    content="Official Portal of Advanced College of Engineering and Management (ACEM). Affiliated to Tribhuvan University (TU). B.E. Computer, Civil, Electrical, Electronics & BCA." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       HEADER WRAPPER (TOP UTILITY BAR + MAIN NAVBAR)
+  ========================================================================== -->
+  <div class="header-wrapper">
+    <!-- Top Utility Bar -->
+    <div class="top-bar">
+      <div class="container top-bar-inner">
+        <ul class="top-info-list">
+          <li class="top-info-item"><span class="tu-badge">TU Affiliated</span></li>
+          <li class="top-info-item">📍 <a href="#contact">Balkhu, Ring Road, Kathmandu</a></li>
+          <li class="top-info-item">📞 <a href="tel:+97715234128">+977-1-5234128 / 5234288</a></li>
+          <li class="top-info-item">✉️ <a href="mailto:info@acem.edu.np">info@acem.edu.np</a></li>
+        </ul>
+
+        <ul class="top-links">
+          <li><a href="http://202.166.197.235:8084/MIS" target="_blank" rel="noopener">🔑 MIS Portal</a></li>
+          <li><a href="#notices">📰 Notice Board</a></li>
+          <li><a href="#research">🔬 AI Research Center</a></li>
+          <li><a href="#admissions">🎓 Admissions 2083</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="navbar" id="navbar">
+      <div class="container navbar-inner">
+        <a href="#" class="brand-logo">
+          <div class="logo-crest">AC</div>
+          <div class="brand-details">
+            <h1>ACEM</h1>
+            <span>Advanced College of Engineering & Mgmt</span>
+          </div>
+        </a>
+
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#programs" class="nav-link">Academic Programs</a></li>
+          <li><a href="#research" class="nav-link">Research & Labs</a></li>
+          <li><a href="#notices" class="nav-link">Notices</a></li>
+          <li><a href="#admissions" class="nav-link">Admissions</a></li>
+          <li><a href="#contact" class="nav-link">Contact Us</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <!-- Theme Toggle -->
+          <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
+            <span id="themeIcon">☀️</span>
+          </button>
+
+          <button class="btn btn-primary" onclick="openModal('admissionModal')">
+            Apply Online →
+          </button>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ==========================================================================
+       HERO LANDING SECTION (CLEAN SHOWCASE)
+  ========================================================================== -->
+  <section class="hero" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          🏛️ Affiliated to Tribhuvan University (IOE & FOHSS)
+        </div>
+        <h1 class="hero-title">
+          Empowering the Next Generation of <span>Engineers & Tech Leaders</span>
+        </h1>
+        <p class="hero-desc">
+          Delivering excellence in technical education, artificial intelligence research, and engineering innovation
+          since 2000 in Balkhu, Kathmandu.
+        </p>
+        <div class="hero-btns">
+          <a href="#programs" class="btn btn-primary">Explore Undergraduate Programs</a>
+          <button class="btn btn-outline" onclick="openModal('tourModal')">Virtual Campus Tour</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>24+</h3>
+            <p>Years of Excellence</p>
+          </div>
+          <div class="stat-item">
+            <h3>5</h3>
+            <p>TU Degree Programs</p>
+          </div>
+          <div class="stat-item">
+            <h3>98%</h3>
+            <p>Career Placement</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Showcase Card (Clean 2D Box) -->
+      <div class="hero-card">
+        <div class="card-banner-img">
+          <span class="card-badge">Excellence Award 2026</span>
+          <div class="card-info">
+            <h4>Best Engineering College Award</h4>
+            <p>Honored for outstanding academic performance, robotics innovations, and AI research excellence in Nepal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ACADEMIC PROGRAMS
+  ========================================================================== -->
+  <section class="section" id="programs">
+    <div class="container">
+      <div class="section-header">
+        <span class="sub-title">Undergraduate Degrees</span>
+        <h2 class="section-title">Tribhuvan University Affiliated Programs</h2>
+        <p class="section-desc">Structured 4-year degree programs providing comprehensive theoretical knowledge and
+          practical laboratory experience.</p>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterPrograms('all', event)">All Programs</button>
+        <button class="tab-btn" onclick="filterPrograms('engineering', event)">Engineering (IOE)</button>
+        <button class="tab-btn" onclick="filterPrograms('it', event)">IT & Computer Apps</button>
+      </div>
+
+      <div class="programs-grid">
+        <!-- B.E. Computer -->
+        <div class="program-card" data-category="engineering">
+          <div>
+            <div class="program-header">
+              <div class="program-icon">💻</div>
+              <span class="program-tu-badge">TU / IOE</span>
+            </div>
+            <h3>B.E. Computer Engineering</h3>
+            <p>Covers Artificial Intelligence, Software Engineering, Database Management, Microprocessors, and Cloud
+              Infrastructure.</p>
+          </div>
+          <div>
+            <div class="program-meta-row">
+              <span>⏱️ 4 Years (8 Semesters)</span>
+              <span>🎓 Bachelor of Engineering</span>
+            </div>
+            <button class="link-btn" onclick="showCourseDetails('B.E. Computer Engineering')">View Course Details
+              →</button>
+          </div>
+        </div>
+
+        <!-- B.E. Civil -->
+        <div class="program-card" data-category="engineering">
+          <div>
+            <div class="program-header">
+              <div class="program-icon">🏗️</div>
+              <span class="program-tu-badge">TU / IOE</span>
+            </div>
+            <h3>B.E. Civil Engineering</h3>
+            <p>Specializes in Structural Analysis, Hydropower Engineering, Highway Construction, and Geotechnical
+              Engineering.</p>
+          </div>
+          <div>
+            <div class="program-meta-row">
+              <span>⏱️ 4 Years (8 Semesters)</span>
+              <span>🎓 Bachelor of Engineering</span>
+            </div>
+            <button class="link-btn" onclick="showCourseDetails('B.E. Civil Engineering')">View Course Details
+              →</button>
+          </div>
+        </div>
+
+        <!-- B.E. Electrical -->
+        <div class="program-card" data-category="engineering">
+          <div>
+            <div class="program-header">
+              <div class="program-icon">⚡</div>
+              <span class="program-tu-badge">TU / IOE</span>
+            </div>
+            <h3>B.E. Electrical Engineering</h3>
+            <p>Focuses on Power System Engineering, Renewable Energy Integration, High Voltage Automation, and Smart
+              Grids.</p>
+          </div>
+          <div>
+            <div class="program-meta-row">
+              <span>⏱️ 4 Years (8 Semesters)</span>
+              <span>🎓 Bachelor of Engineering</span>
+            </div>
+            <button class="link-btn" onclick="showCourseDetails('B.E. Electrical Engineering')">View Course Details
+              →</button>
+          </div>
+        </div>
+
+        <!-- B.E. Electronics -->
+        <div class="program-card" data-category="engineering">
+          <div>
+            <div class="program-header">
+              <div class="program-icon">📡</div>
+              <span class="program-tu-badge">TU / IOE</span>
+            </div>
+            <h3>B.E. Electronics & Communication</h3>
+            <p>Covers Telecommunications, Embedded Systems, Internet of Things (IoT), Digital Signal Processing, and
+              VLSI.</p>
+          </div>
+          <div>
+            <div class="program-meta-row">
+              <span>⏱️ 4 Years (8 Semesters)</span>
+              <span>🎓 Bachelor of Engineering</span>
+            </div>
+            <button class="link-btn" onclick="showCourseDetails('B.E. Electronics & Communication')">View Course Details
+              →</button>
+          </div>
+        </div>
+
+        <!-- BCA -->
+        <div class="program-card" data-category="it">
+          <div>
+            <div class="program-header">
+              <div class="program-icon">🚀</div>
+              <span class="program-tu-badge">TU / FOHSS</span>
+            </div>
+            <h3>Bachelor in Computer Application (BCA)</h3>
+            <p>Comprehensive computer software degree covering Web Development, Mobile App Dev, Systems Analysis, and
+              Cybersecurity.</p>
+          </div>
+          <div>
+            <div class="program-meta-row">
+              <span>⏱️ 4 Years (8 Semesters)</span>
+              <span>🎓 Bachelor Degree</span>
+            </div>
+            <button class="link-btn" onclick="showCourseDetails('Bachelor in Computer Application (BCA)')">View Course
+              Details →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       RESEARCH & FACILITIES
+  ========================================================================== -->
+  <section class="section section-alt" id="research">
+    <div class="container">
+      <div class="section-header">
+        <span class="sub-title">Centers of Innovation</span>
+        <h2 class="section-title">Research & Technical Infrastructure</h2>
+        <p class="section-desc">State-of-the-art laboratories and research units driving student innovation.</p>
+      </div>
+
+      <div class="research-grid">
+        <div class="research-card">
+          <span class="research-tag">AI Center</span>
+          <h4>AI Research Center (AIRC)</h4>
+          <p>Dedicated computer vision and natural language processing workstation focused on Nepali language AI
+            applications.</p>
+        </div>
+
+        <div class="research-card">
+          <span class="research-tag">Industry Link</span>
+          <h4>CAILIC Collaborations</h4>
+          <p>Center for Academia-Industry Linkages offering internships, industrial tours, and placement support.</p>
+        </div>
+
+        <div class="research-card">
+          <span class="research-tag">Robotics Hub</span>
+          <h4>Robotics & Embedded Systems Lab</h4>
+          <p>Equipped with 3D printers, microcontrollers, sensors, and autonomous drone testing platforms.</p>
+        </div>
+
+        <div class="research-card">
+          <span class="research-tag">Civil Testing</span>
+          <h4>Material & Structural Testing Facility</h4>
+          <p>ISO standard equipment for concrete testing, soil mechanics, and highway construction analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       NOTICES & EVENTS
+  ========================================================================== -->
+  <section class="section" id="notices">
+    <div class="container">
+      <div class="notices-layout">
+        <!-- Official Notices -->
+        <div class="notice-box">
+          <div class="notice-box-header">
+            <h3>📢 College Notice Board</h3>
+            <span class="tu-badge" style="font-size:0.7rem;">Official Updates</span>
+          </div>
+
+          <ul class="notice-list">
+            <li class="notice-item">
+              <div class="notice-date">
+                <span class="day">15</span>
+                <span class="month">AUG</span>
+              </div>
+              <div class="notice-info">
+                <h4 onclick="openNoticeModal('IOE Entrance Examination Guidelines 2083')">IOE Entrance Examination
+                  Guidelines 2083</h4>
+                <p>Important instructions for B.E. admission entrance examinees affiliated with Tribhuvan University.
+                </p>
+              </div>
+            </li>
+
+            <li class="notice-item">
+              <div class="notice-date">
+                <span class="day">08</span>
+                <span class="month">AUG</span>
+              </div>
+              <div class="notice-info">
+                <h4 onclick="openNoticeModal('National STEAM Materials Award Winners')">National STEAM Materials Design
+                  Competition Winner</h4>
+                <p>ACEM students secured 1st position in national level engineering design showcase.</p>
+              </div>
+            </li>
+
+            <li class="notice-item">
+              <div class="notice-date">
+                <span class="day">01</span>
+                <span class="month">AUG</span>
+              </div>
+              <div class="notice-info">
+                <h4 onclick="openNoticeModal('Semester Mid-Term Assessment Schedule')">Semester Internal Assessment
+                  Routine</h4>
+                <p>Exam schedule for 2nd and 4th semester B.E. and BCA students.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Campus Events -->
+        <div class="notice-box">
+          <div class="notice-box-header">
+            <h3>🎉 Events & Student Clubs</h3>
+            <span class="tu-badge" style="font-size:0.7rem;">Campus Life</span>
+          </div>
+
+          <ul class="notice-list">
+            <li class="notice-item">
+              <div class="notice-date">
+                <span class="day">22</span>
+                <span class="month">AUG</span>
+              </div>
+              <div class="notice-info">
+                <h4>Hack-ACEM 2026: 36-Hour Hackathon</h4>
+                <p>Organized by ACEM IT Club in collaboration with leading tech companies in Nepal.</p>
+              </div>
+            </li>
+
+            <li class="notice-item">
+              <div class="notice-date">
+                <span class="day">18</span>
+                <span class="month">AUG</span>
+              </div>
+              <div class="notice-info">
+                <h4>RoboWars Arena Championship 5.0</h4>
+                <p>Inter-college robotics tournament hosted by ACEM Robotics Club.</p>
+              </div>
+            </li>
+
+            <li class="notice-item">
+              <div class="notice-date">
+                <span class="day">10</span>
+                <span class="month">AUG</span>
+              </div>
+              <div class="notice-info">
+                <h4>Civil Engineering Expressway Site Inspection</h4>
+                <p>Field visit to Fast-Track Highway project for final year Civil students.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ADMISSIONS
+  ========================================================================== -->
+  <section class="section section-alt" id="admissions">
+    <div class="container">
+      <div class="section-header">
+        <span class="sub-title">Admission Process</span>
+        <h2 class="section-title">Steps to Apply for Admissions</h2>
+        <p class="section-desc">Follow our 4-step admission guide for TU B.E. and BCA programs.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h4>IOE Entrance Exam</h4>
+          <p>Appear and pass the Tribhuvan University IOE entrance examination.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h4>Application Submission</h4>
+          <p>Fill out the application online or visit the Balkhu admissions desk.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h4>Merit Counseling</h4>
+          <p>Attend merit counseling and verification of academic documents.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">04</span>
+          <h4>Enrollment</h4>
+          <p>Complete fee payment, receive your student ID, and attend orientation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT & INQUIRY FORM
+  ========================================================================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Details -->
+        <div class="contact-card">
+          <span class="sub-title">Campus Contact</span>
+          <h2 class="section-title">Get in Touch with Us</h2>
+          <p class="section-desc">Our admissions office in Balkhu is open Sunday to Friday, 9:00 AM to 4:00 PM.</p>
+
+          <div class="contact-details">
+            <div class="detail-item">
+              <div class="detail-icon">📍</div>
+              <div class="detail-text">
+                <strong>Location Address</strong>
+                <span>Balkhu, Ring Road, Kathmandu, Nepal</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">📞</div>
+              <div class="detail-text">
+                <strong>Telephone Numbers</strong>
+                <span>+977-1-5234128 / +977-1-5234288</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">✉️</div>
+              <div class="detail-text">
+                <strong>Email Address</strong>
+                <span>info@acem.edu.np | admissions@acem.edu.np</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form-box">
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 18px; color: var(--acem-blue);">Send Admission
+            Inquiry</h3>
+          <form onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Aarav Sharma" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="aarav@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" placeholder="+977 98XXXXXXXX" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Program of Interest</label>
+              <select class="form-select" required>
+                <option value="">Select Program</option>
+                <option value="B.E. Computer Engineering">B.E. Computer Engineering</option>
+                <option value="B.E. Civil Engineering">B.E. Civil Engineering</option>
+                <option value="B.E. Electrical Engineering">B.E. Electrical Engineering</option>
+                <option value="B.E. Electronics & Comm">B.E. Electronics & Communication</option>
+                <option value="BCA">Bachelor in Computer Application (BCA)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Your Inquiry Message</label>
+              <textarea class="form-textarea" placeholder="Ask about entrance exams, fee structure, scholarships..."
+                required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+  ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 14px;">
+            <div class="logo-crest">AC</div>
+            <div class="brand-details">
+              <h1 style="color:#ffffff;">ACEM</h1>
+              <span style="color:var(--acem-orange);">Advanced College of Engineering & Mgmt</span>
+            </div>
+          </div>
+          <p>
+            Established in 2000. Affiliated to Tribhuvan University. Dedicated to delivering technical leadership and
+            engineering excellence in Nepal.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Academic Degrees</h4>
+          <ul class="footer-links-list">
+            <li><a href="#programs">B.E. Computer Engineering</a></li>
+            <li><a href="#programs">B.E. Civil Engineering</a></li>
+            <li><a href="#programs">B.E. Electrical Engineering</a></li>
+            <li><a href="#programs">B.E. Electronics & Comm</a></li>
+            <li><a href="#programs">BCA Program</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Quick Portals</h4>
+          <ul class="footer-links-list">
+            <li><a href="http://202.166.197.235:8084/MIS" target="_blank" rel="noopener">MIS Student Login</a></li>
+            <li><a href="#notices">Notice Board</a></li>
+            <li><a href="#research">AI Research Center</a></li>
+            <li><a href="#admissions">Admissions Guide</a></li>
+            <li><a href="#contact">Campus Location</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Campus Location</h4>
+          <p>Balkhu, Ring Road, Kathmandu, Nepal</p>
+          <p style="margin-top: 6px;"><strong>Phone:</strong> +977-1-5234128</p>
+          <p><strong>Email:</strong> info@acem.edu.np</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Advanced College of Engineering and Management (ACEM). All Rights Reserved.</p>
+        <p>Affiliated with <strong>Tribhuvan University (TU)</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS
+  ========================================================================== -->
+  <!-- Admission Modal -->
+  <div class="modal-overlay" id="admissionModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('admissionModal')">✕</button>
+      <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--acem-blue);">Online Admission
+        Registration</h3>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 18px;">
+        Register your details to receive admission counseling & prospectus.
+      </p>
+      <form onsubmit="handleModalSubmit(event, 'admissionModal')">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="+977 98XXXXXXXX" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Program</label>
+          <select class="form-select" required>
+            <option value="B.E. Computer">B.E. Computer Engineering</option>
+            <option value="B.E. Civil">B.E. Civil Engineering</option>
+            <option value="B.E. Electrical">B.E. Electrical Engineering</option>
+            <option value="B.E. Electronics">B.E. Electronics & Communication</option>
+            <option value="BCA">Bachelor in Computer Application (BCA)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 10px;">Submit Registration</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Virtual Tour Modal -->
+  <div class="modal-overlay" id="tourModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('tourModal')">✕</button>
+      <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--acem-blue);">🏛️ Virtual Campus
+        Tour</h3>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 18px;">
+        ACEM Balkhu campus features AI Research Center, Central Library, Civil Workshop, and Electronics Labs.
+      </p>
+      <div
+        style="background: var(--acem-orange-light); border: 1px solid rgba(242, 101, 34, 0.3); padding: 18px; border-radius: var(--radius-sm); text-align: center;">
+        <p style="font-size: 0.9rem; color: var(--acem-orange); font-weight: 700;">Guided Campus Visit</p>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Sunday to Friday | 9:00 AM - 4:00 PM
+          at Balkhu, Kathmandu.</p>
+      </div>
+      <button class="btn btn-navy" onclick="closeModal('tourModal')" style="width:100%; margin-top: 18px;">Close
+        Window</button>
+    </div>
+  </div>
+
+  <!-- Info Modal -->
+  <div class="modal-overlay" id="infoModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('infoModal')">✕</button>
+      <h3 id="infoModalTitle" style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--acem-blue);">
+        Program Details</h3>
+      <div id="infoModalBody" style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+        Details loading...
+      </div>
+      <button class="btn btn-primary" onclick="closeModal('infoModal')" style="width:100%; margin-top: 18px;">Close
+        Details</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT FOR INTERACTIVITY & THEME TOGGLE
+  ========================================================================== -->
+  <script>
+    // Theme Toggle Functionality
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+      htmlEl.setAttribute('data-theme', newTheme);
+      localStorage.setItem('acem_theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      const iconEl = document.getElementById('themeIcon');
+      if (iconEl) {
+        iconEl.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    }
+
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('acem_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    })();
+
+    // Filter Programs
+    function filterPrograms(category, event) {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.program-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal Controllers
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Thank you for contacting ACEM! Our admissions desk will get in touch with you shortly.');
+      e.target.reset();
+    }
+
+    function handleModalSubmit(e, modalId) {
+      e.preventDefault();
+      closeModal(modalId);
+      alert('Your registration request has been submitted successfully.');
+    }
+
+    function showCourseDetails(courseName) {
+      const title = document.getElementById('infoModalTitle');
+      const body = document.getElementById('infoModalBody');
+
+      title.textContent = courseName;
+      body.innerHTML = `
+        <p style="margin-bottom: 8px;"><strong>Affiliation:</strong> Tribhuvan University (TU)</p>
+        <p style="margin-bottom: 8px;"><strong>Duration:</strong> 4 Years (8 Semesters)</p>
+        <p style="margin-bottom: 8px;"><strong>Eligibility:</strong> +2 Science / A-Level with Physics, Chemistry & Mathematics (Min C grade / 45%) and IOE entrance exam rank.</p>
+        <p style="margin-bottom: 8px;"><strong>Career Prospects:</strong> Software Architect, AI Researcher, Civil Engineer, Power System Analyst, Telecom Specialist.</p>
+      `;
+      openModal('infoModal');
+    }
+
+    function openNoticeModal(noticeTitle) {
+      const title = document.getElementById('infoModalTitle');
+      const body = document.getElementById('infoModalBody');
+
+      title.textContent = noticeTitle;
+      body.innerHTML = `
+        <p style="margin-bottom: 8px;">Official notice published by the ACEM Academic Administration Office.</p>
+        <p style="margin-bottom: 8px;">For detailed syllabus schedules and official paperwork, visit the Balkhu campus desk or contact your department head.</p>
+      `;
+      openModal('infoModal');
+    }
+  </script>
+</body>
+
 </html>
